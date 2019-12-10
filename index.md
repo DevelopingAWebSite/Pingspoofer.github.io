@@ -1,37 +1,67 @@
-## Welcome to GitHub Pages
-
-You can use the [editor on GitHub](https://github.com/DevelopingAWebSite/Pingspoofer.github.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/DevelopingAWebSite/Pingspoofer.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+<!Doctype html>
+<html lang="en">
+            <head>
+            <meta charset="UTF-8">
+            <title>Hello</title>
+            <style type="text/css">
+            canvas
+            { border : 1px solid black;
+             background : yellow;
+            }
+            </style>
+            </head>
+            <body>
+            <canvas></canvas>
+            <script>
+            var canvas=document.querySelector('canvas');
+            canvas.width=window.innerWidth;
+            canvas.height=window.innerHeight;
+            var c=canvas.getContext('2d');
+            function Circle(x,y,dx,dy,radius)
+            { this.x=x;
+              this.y=y;
+              this.dx=dx;
+              this.dy=dy;
+              this.radius=radius;
+              this.draw=function()
+              { c.beginPath();
+                c.arc(this.x,this.y,this.radius,0,Math.PI*2,false);
+                c.stroke();
+                c.fillStyle='red';
+                c.fill();
+              }
+              this.update= function()
+              {  if(this.x+this.radius >innerWidth || this.x - this.radius < 0)
+                  {this.dx=-this.dx;
+                  }
+                if(this.y+this.radius>innerHeight || this.y - this.radius < 0)
+                {this.dy =-this.dy;
+                }
+                this.x=this.x+this.dx;
+                this.y=this.y+this.dy;
+                this.draw();
+                
+              }
+               
+            }
+            var circleArray = [];
+            for(var I=0;I<100;I++)
+            {var radius= 30;
+             var x= Math.random()*(window.innerHeight/1.1)+40;
+             var y= Math.random()*(window.innerHeight/1.1)+40;
+             var dx= Math.random()*10;
+             var dy= Math.random()*9;
+             circleArray.push(new Circle(x,y,dx,dy,radius));
+            }
+            function animate()
+            { requestAnimationFrame(animate);
+              c.clearRect(0,0,canvas.width,canvas.height);
+             for(var I=0;I<circleArray.length;I++)
+             {circleArray[I].update();
+               }              
+              circle.update();
+            }
+            animate();
+            </script>
+            </body> 
+ </html>
