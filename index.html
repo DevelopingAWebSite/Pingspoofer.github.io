@@ -33,12 +33,7 @@
                   {  mouse.x = event.x;
                      mouse.y = event.y;
                   })
-                  window.addEventListener('resize',function()
-                  {canvas.width = window.innerWidth;
-                   canvas.height = window.innerHeight;
-                   circleArray= [];
-                   init();
-                  });
+                  
                   
                   function Circle(x,y,dx,dy,radius)
                   { this.x=x;
@@ -56,21 +51,35 @@
                           
                     }
                     this.update=function()
-                    {  if(this.x+this.radius > innerWidth || this.x - this.radius < 0)
+                    {   if(this.x+this.radius > innerWidth || this.x - this.radius < 0)
                        {this.dx=-this.dx;
                        }
                        if(this.y+this.radius > innerHeight || this.y - this.radius < 0)
                        {this.dy=-this.dy;
                        }
+                        if(((((mouse.x - this.x)) < 80) && ((mouse.x - this.x )> -80)) && ((((mouse.y - this.y ))< 80) && ((mouse.y - this.y )> -80) )) 
+                       {
+                         
+                         this.x = mouse.x;
+                         this.y = mouse.y;
+                         
+                        }
+                       else
+                      { 
                        this.x=this.x+this.dx;
-                       this.y=this.y+this.dy;
+                        this.y=this.y+this.dy;
+                       
+                       }
+                       
                        if (mouse.x - this.x < 150 && mouse.x - this.x > -150 && mouse.y - this.y < 150 && mouse.y - this.y > -150  && this.radius<150)
                         { this.radius += 5;
                         } else 
                           if(this.radius > this.maxradius)
                          {this.radius-=1;
                          }
+                         
                        this.draw();
+                       
                     }
                   }
                   var circleArray = [];
@@ -94,6 +103,7 @@
                   }
                   function animate()
                   { requestAnimationFrame(animate);
+
                     c.clearRect(0,0,innerWidth,innerHeight);
                     for(var i=0;i<circleArray.length;i++)
                     {circleArray[i].update();
@@ -104,3 +114,4 @@
                  </script>
                  </body>
 </html>
+
